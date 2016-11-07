@@ -1,0 +1,42 @@
+{
+  "name": "Tetris3D",
+  "version": "1.0.0",
+  "description": "A new kind of game",
+  "main": "server.js",
+  "devDependencies": {
+    "browserify"     : "*",
+    "concurrently"   : "*",
+    "better-npm-run" : "~0.0.1",
+    "nodemon"        : "^1.9.2",
+    "uglify-js"      : "^2.6.1",
+    "watchify"       : "^3.7.0"
+  },
+  "scripts": {
+    "watch" : "watchify client/app/main.js -o public/tetris3D_dev.js -v",
+    "build" : "browserify client/app/main.js -o public/tetris3D_dev.js -v && browserify client/app/main.js | uglifyjs -cm > public/tetris3D_prod.js",
+    "dev"   : "better-npm-run dev",
+    "prod"  : "better-npm-run prod"
+  },
+  "betterScripts": {
+    "dev": {
+      "command": "concurrently \"nodemon server.js\" \"watchify client/app/main.js -o public/tetris3D_dev.js -v\" ",
+      "env": {
+        "NODE_ENV": "dev"
+      }
+    },
+    "prod": {
+      "command": "nodemon server.js",
+      "env": {
+        "NODE_ENV": "prod"
+      }
+    }
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "ejs"           : "^2.4.1",
+    "express"       : "^4.13.4",
+    "tumblr.js"     : "^1.0.0",
+    "cors-anywhere" : "*"
+  }
+}
